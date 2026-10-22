@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Maps with 2 Markers</title>
+    <style>
+        /* ตั้งค่าพื้นฐาน */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            color: #1a73e8;
+            margin-top: 0;
+            text-align: center;
+        }
+
+        p {
+            color: #666;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* ส่วนแสดงแผนที่ */
+        #map {
+            height: 500px;
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+
+        /* ตกแต่ง InfoWindow เล็กน้อย */
+        .info-window-content {
+            padding: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Google Map แสดงจุดพิกัด</h2>
+    <p>คลิกที่ Marker เพื่อดูชื่อสถานที่</p>
+    
+    <!-- พื้นที่สำหรับแสดงแผนที่ -->
+    <div id="map"></div>
+</div>
+
+<script>
+    function initMap() {
+        // 1. กำหนดจุดกึ่งกลางแผนที่ (กรุงเทพฯ)
+        const centerLocation = { lat: 13.7563, lng: 100.5018 };
+
+        // 2. สร้างแผนที่
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 14,
+            center: centerLocation,
+            mapTypeControl: true // แสดงปุ่มเปลี่ยนประเภทแผนที่ (ดาวเทียม/แผนที่ปกติ)
+        });
+
+        // 3. เตรียมข้อมูล Marker
+        const locations = [
+            {
+                position: { lat: 13.7468, lng: 100.5350 },
+                title: "จุดที่ 1: Siam Paragon"
+            },
+            {
+                position: { lat: 13.7465, lng: 100.5397 },
+                title: "จุดที่ 2: Central World"
+            }
+        ];
+
+        // 4. สร้าง InfoWindow สำหรับแสดง Popup
+        const infoWindow = new google.maps.InfoWindow();
+
+        // 5. วนลูปสร้าง Marker จากข้อมูลข้างต้น
+        locations.forEach(loc => {
+            const marker = new google.maps.Marker({
+                position: loc.position,
+                map: map,
+                title: loc.title,
+                label: "" // คุณสามารถใส่ตัวอักษรได้ เช่น "A"
+            });
+
+            // เพิ่ม Event เมื่อคลิกที่ Marker
+            marker.addListener("click", () => {
+                infoWindow.setContent(`<div class="info-window-content"><strong>${loc.title}</strong></div>`);
+                infoWindow.open(map, marker);
+            });
+        });
+    }
+</script>
+
+<!-- โหลด Google Maps API พร้อม API Key ของคุณ -->
+<script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5l0aPyGFqiqY5DpqOYf-8YhN_eYHHobU&callback=initMap">
+</script>
+
+</body>
+</html>
+                                                            
