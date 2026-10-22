@@ -1,1 +1,798 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ความรู้เรื่องพายุในประเทศไทย - Fahs</title>
+    <!-- Google Fonts (Prompt) -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0f172a;
+            --accent-color: #475569;
+            --accent-gradient: linear-gradient(135deg, #64748b 0%, #334155 100%);
+            --bg-color: #ffffff;
+            --card-bg: #f8fafc;
+            --text-color: #1e293b;
+            --text-muted: #64748b;
+            --footer-bg: #090d16;
+            --border-color: #000000;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+
+        /* Top Navigation Bar & Logo */
+        nav {
+            background-color: #1e293b;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 8%;
+            border-bottom: 2px solid #000000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #cbd5e1;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        /* Hero Header Section */
+        header {
+            background: linear-gradient(rgba(30, 41, 59, 0.92), rgba(15, 23, 42, 0.95)), 
+                        url('https://images.unsplash.com/photo-1527482797697-8795b05a13fe?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            color: white;
+            text-align: center;
+            padding: 45px 20px 35px;
+            position: relative;
+            border-bottom: 4px solid #475569;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+            letter-spacing: -0.5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            max-width: 680px;
+            margin: 0 auto 15px;
+            font-weight: 300;
+            color: #e2e8f0;
+            line-height: 1.7;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1050px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: var(--card-bg);
+            color: var(--text-color);
+            padding: 40px;
+            margin-bottom: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 2px solid #000000;
+            border-left: 5px solid #475569;
+            scroll-margin-top: 90px;
+        }
+
+        h2.section-title {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #475569;
+            display: inline-block;
+            padding-bottom: 1px;
+        }
+
+        .storm-type-block {
+            background: #ffffff;
+            border: 1px solid #000000;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            scroll-margin-top: 100px;
+        }
+
+        .storm-type-header {
+            display: flex;
+            align-items: center;
+            background: var(--card-bg);
+            border-bottom: 1px solid #000000;
+        }
+
+        .storm-type-header img {
+            width: 200px;
+            height: 130px;
+            object-fit: cover;
+        }
+
+        .storm-type-header-title {
+            padding: 20px 25px;
+        }
+
+        .storm-type-header-title h3 {
+            color: #334155;
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+
+        .storm-type-header-title p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* Grid จัดการ์ดพายุแบบ 2 คอลัมน์สมดุล */
+        .sub-items-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 24px;
+            background: #ffffff;
+        }
+
+        .sub-item-card {
+            background: var(--card-bg);
+            border: 1px solid #000000;
+            border-top: 4px solid #475569;
+            padding: 22px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .sub-item-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            border-top-color: #0f172a;
+        }
+
+        .sub-item-card h4 {
+            color: var(--primary-color);
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .sub-item-card ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            font-size: 0.92rem;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .sub-item-card ul li {
+            margin-bottom: 8px;
+        }
+
+        .sub-item-card ul li:last-child {
+            margin-bottom: 0;
+        }
+
+        .badge {
+            display: inline-block;
+            align-self: flex-start;
+            background: var(--accent-gradient);
+            color: white;
+            font-size: 0.8rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            letter-spacing: 0.3px;
+        }
+
+        /* Map Section Container */
+        .map-container {
+            margin-top: 20px;
+            border: 2px solid #000000;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #ffffff;
+        }
+
+        #googleMap {
+            width: 100%;
+            height: 480px;
+        }
+
+        /* Legend Box */
+        .map-legend {
+            background: #ffffff;
+            border: 1px solid #000000;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .map-legend h3 {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+            border-bottom: 2px solid #cbd5e1;
+            padding-bottom: 5px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .legend-dot {
+            width: 16px;
+            height: 16px;
+            background-color: #ea4335;
+            border-radius: 50%;
+            margin-top: 4px;
+            flex-shrink: 0;
+            border: 2px solid #ffffff;
+            box-shadow: 0 0 0 1px #000000;
+        }
+
+        /* Footer Sitemap & Credits */
+        footer {
+            background-color: var(--footer-bg);
+            color: #94a3b8;
+            padding: 50px 8% 20px;
+            margin-top: 60px;
+            border-top: 2px solid #000000;
+        }
+
+        .sitemap-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .sitemap-col h4 {
+            color: #f8fafc;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            position: relative;
+            padding-bottom: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sitemap-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 25px;
+            height: 2px;
+            background: var(--accent-gradient);
+        }
+
+        .sitemap-col ul {
+            list-style: none;
+        }
+
+        .sitemap-col ul li {
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #94a3b8;
+        }
+
+        .sitemap-col ul li a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .sitemap-col ul li a:hover {
+            color: #ffffff;
+        }
+
+        .credit-block {
+            font-size: 0.83rem;
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        .credit-block p {
+            margin-bottom: 10px;
+        }
+
+        .credit-block span.label {
+            color: #cbd5e1;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        /* Back to Top Button */
+        #backToTopBtn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+            z-index: 999;
+        }
+
+        #backToTopBtn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            header h1 {
+                font-size: 2.2rem;
+            }
+            section {
+                padding: 25px 20px;
+            }
+            .storm-type-header {
+                flex-direction: column;
+            }
+            .storm-type-header img {
+                width: 100%;
+                height: 160px;
+            }
+            .sub-items-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">
+            🌪️ Fahs
+        </a>
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="#about">พายุคืออะไร</a></li>
+                <li><a href="#tropical">พายุหมุนเขตร้อน</a></li>
+                <li><a href="#thunderstorm">พายุฝนฟ้าคะนอง</a></li>
+                <li><a href="#tornado">พายุงวงช้าง</a></li>
+                <li><a href="#storm-map-section">แผนที่หมุดพายุ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header Hero Banner -->
+    <header>
+        <h1>ความรู้เรื่องพายุในประเทศไทย</h1>
+        <p>แหล่งรวบรวมข้อมูลจำแนกประเภทพายุ เหตุการณ์สำคัญในประวัติศาสตร์ไทย พร้อมแผนที่ปักหมุดตำแหน่งพายุ</p>
+    </header>
+
+    <!-- Main Content Container -->
+    <div class="container">
+        
+        <!-- Section: พายุคืออะไร -->
+        <section id="about">
+            <h2 class="section-title">พายุคืออะไร?</h2>
+            <p><strong>พายุ (Storm)</strong> คือ สภาวะบรรยากาศที่เกิดความแปรปรวนอย่างรุนแรง เกิดขึ้นเมื่อมีความแตกต่างของอุณหภูมิและความกดอากาศในแต่ละพื้นที่อย่างมาก มวลอากาศจึงเคลื่อนที่เข้าหากันด้วยความเร็วสูงเพื่อปรับสมดุลความร้อนของโลก</p>
+            <p>กระบวนการดังกล่าวทำให้อากาศร้อนชื้นลอยตัวขึ้นสู่เบื้องบนอย่างรวดเร็ว เกิดการกลั่นตัวเป็นเมฆฝนขนาดใหญ่ และก่อให้เกิดสภาพอากาศที่รุนแรง เช่น ลมพัดแรงจัด ฝนตกหนัก ฟ้าแลบ ฟ้าผ่า และลูกเห็บตก</p>
+        </section>
+
+        <!-- Section: ประเภทของพายุ -->
+        <section id="types">
+            <h2 class="section-title">การจำแนกประเภทพายุในประเทศไทย</h2>
+            <p style="margin-bottom: 25px; color: var(--text-muted);">จำแนกออกเป็น 3 ประเภทหลัก พร้อมข้อมูลเหตุการณ์จริงในประวัติศาสตร์ไทย:</p>
+
+            <!-- 1. พายุหมุนเขตร้อน -->
+            <div id="tropical" class="storm-type-block">
+                <div class="storm-type-header">
+                    <img src="img/p17.jpg" alt="พายุหมุนเขตร้อน" onerror="this.src='https://images.unsplash.com/photo-1527482797697-8795b05a13fe?auto=format&fit=crop&w=600&q=80'">
+                    <div class="storm-type-header-title">
+                        <h3>1. พายุหมุนเขตร้อน (Tropical Cyclone)</h3>
+                        <p>พายุหมุนขนาดใหญ่ที่ส่งผลกระทบต่อประเทศไทย พร้อมตัวอย่างเหตุการณ์สำคัญ:</p>
+                    </div>
+                </div>
+                
+                <div class="sub-items-grid">
+                    <!-- แฮร์เรียต -->
+                    <div class="sub-item-card">
+                        <span class="badge">ต.ค. 2505</span>
+                        <h4>พายุโซนร้อน "แฮร์เรียต" (Harriet)</h4>
+                        <ul>
+                            <li>พัดขึ้นฝั่งที่ แหลมตะลุมพุก อ.ปากพนัง จ.นครศรีธรรมราช</li>
+                            <li>ถือเป็นพายุโซนร้อนที่สร้างความสูญเสียร้ายแรงที่สุดในประวัติศาสตร์ภาคใต้</li>
+                        </ul>
+                    </div>
+
+                    <!-- เกย์ -->
+                    <div class="sub-item-card">
+                        <span class="badge">พ.ย. 2532</span>
+                        <h4>พายุไต้ฝุ่น "เกย์" (Gay)</h4>
+                        <ul>
+                            <li>ไต้ฝุ่นเพียงลูกเดียวที่พัดขึ้นฝั่งประเทศไทยโดยตรงด้วยกำลังแรงสูงสุด ณ อ.ปะทิว และ อ.ท่าแซะ จ.ชุมพร</li>
+                        </ul>
+                    </div>
+
+                    <!-- ปาบึก -->
+                    <div class="sub-item-card">
+                        <span class="badge">ม.ค. 2562</span>
+                        <h4>พายุโซนร้อน "ปาบึก" (Pabuk)</h4>
+                        <ul>
+                            <li>พายุหมุนเขตร้อนที่พัดเข้าภาคใต้ของไทยนอกฤดูกาล (ช่วงต้นปี)</li>
+                        </ul>
+                    </div>
+
+                    <!-- ยางิ -->
+                    <div class="sub-item-card">
+                        <span class="badge">ก.ย. 2567</span>
+                        <h4>พายุซูเปอร์ไต้ฝุ่น "ยางิ" (Yagi)</h4>
+                        <ul>
+                            <li>แม้ไม่ได้ขึ้นฝั่งไทยโดยตรง แต่ร่องมรสุมและเศษซากพายุทำให้เกิดฝนตกหนักและอุทกภัยดินสไลด์ครั้งใหญ่ทางภาคเหนือ (เช่น เชียงราย เชียงใหม่ และน่าน)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. พายุฝนฟ้าคะนอง -->
+            <div id="thunderstorm" class="storm-type-block">
+                <div class="storm-type-header">
+                    <img src="img/P15.jpg" alt="พายุฝนฟ้าคะนอง" onerror="this.src='https://images.unsplash.com/photo-1516912481808-3406841bd33c?auto=format&fit=crop&w=600&q=80'">
+                    <div class="storm-type-header-title">
+                        <h3>2. พายุฝนฟ้าคะนอง และพายุฤดูร้อน (Thunderstorms & Summer Storms)</h3>
+                        <p>เกิดจากสภาพอากาศร้อนชื้น มักเกิดในช่วงเปลี่ยนฤดู:</p>
+                    </div>
+                </div>
+                <div class="sub-items-grid">
+                    <div class="sub-item-card">
+                        <h4>พายุฟ้าคะนองทั่วไป</h4>
+                        <ul>
+                            <li>เกิดจากเมฆคิวมูโลนิมบัสก้อนเดียว ดำเนินช่วงสั้น 30-60 นาที</li>
+                            <li>ทำให้เกิดฝนตกหนัก ลมกระโชกแรง และฟ้าผ่า</li>
+                        </ul>
+                    </div>
+                    <div class="sub-item-card">
+                        <h4>พายุฤดูร้อน (Summer Storm)</h4>
+                        <ul>
+                            <li>เกิดช่วงเดือนมีนาคม - พฤษภาคม จากมวลอากาศเย็นจีนปะทะอากาศร้อนของไทย</li>
+                            <li>ทำให้เกิดลมกระโชกแรงและลูกเห็บตกในภาคอีสานและภาคกลาง</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. พายุงวงช้าง -->
+            <div id="tornado" class="storm-type-block">
+                <div class="storm-type-header">
+                    <img src="img/P16.jpg" alt="พายุงวงช้าง" onerror="this.src='https://images.unsplash.com/photo-1527482797697-8795b05a13fe?auto=format&fit=crop&w=600&q=80'">
+                    <div class="storm-type-header-title">
+                        <h3>3. พายุงวงช้าง / ลมงวง (Waterspouts / Small Tornadoes)</h3>
+                        <p>พายุหมุนเกลียวขนาดเล็กที่ยื่นลงมาจากฐานเมฆสู่ผิวน้ำหรือพื้นดิน:</p>
+                    </div>
+                </div>
+                <div class="sub-items-grid">
+                    <div class="sub-item-card">
+                        <h4>พายุงวงช้างในทะเล (Waterspout)</h4>
+                        <ul>
+                            <li>มักพบบ่อยตามแนวชายฝั่งทะเลอ่าวไทยและทะเลอันดามัน</li>
+                            <li>เมื่อพัดขึ้นฝั่งอาจทำลายสิ่งปลูกสร้างชายฝั่ง หลังคาบ้านเรือน และเรือประมงขนาดเล็ก</li>
+                        </ul>
+                    </div>
+                    <div class="sub-item-card">
+                        <h4>ลมงวงบนแผ่นดิน (Landspout)</h4>
+                        <ul>
+                            <li>พายุหมุนขนาดเล็กบนแผ่นดิน เกิดลมกระโชกแรงระยะเวลาสั้นๆ</li>
+                            <li>ทำให้ต้นไม้ถอนรากและหลังคาบ้านปลิวเสียหาย</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Section: แผนที่ Google Maps ปักหมุดพายุ -->
+        <section id="storm-map-section">
+            <h2 class="section-title">แผนที่ปักหมุดตำแหน่งพายุในประเทศไทย</h2>
+            <p style="margin-bottom: 15px; color: var(--text-muted);">
+                แสดงตำแหน่งมาร์คจุดเหตุการณ์พายุสำคัญในประวัติศาสตร์ไทย คลิกที่หมุดแต่ละจุดเพื่อดูรายละเอียด:
+            </p>
+            <div class="map-container">
+                <div id="googleMap"></div>
+            </div>
+
+            <!-- Legend Box -->
+            <div class="map-legend">
+                <h3>📌 รายละเอียดตำแหน่งหมุดบนแผนที่</h3>
+                <div class="legend-item">
+                    <div class="legend-dot"></div>
+                    <div>
+                        <strong>1. แหลมตะลุมพุก จ.นครศรีธรรมราช:</strong> จุดขึ้นฝั่งของพายุโซนร้อน "แฮร์เรียต" (ต.ค. 2505)
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot"></div>
+                    <div>
+                        <strong>2. อ.ปะทิว / อ.ท่าแซะ จ.ชุมพร:</strong> จุดขึ้นฝั่งของพายุไต้ฝุ่น "เกย์" (พ.ย. 2532)
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot"></div>
+                    <div>
+                        <strong>3. ชายฝั่งภาคใต้ตอนล่าง (ปากพนัง/หัวไทร):</strong> จุดขึ้นฝั่งของพายุโซนร้อน "ปาบึก" (ม.ค. 2562)
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot"></div>
+                    <div>
+                        <strong>4. ภาคเหนือตอนบน (เชียงราย / เชียงใหม่):</strong> พื้นที่รับอิทธิพลฝนตกหนักและอุทกภัยดินสไลด์จากพายุซูเปอร์ไต้ฝุ่น "ยางิ" (ก.ย. 2567)
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot"></div>
+                    <div>
+                        <strong>5. ภาคตะวันออกเฉียงเหนือ (ขอนแก่น / นครราชสีมา):</strong> พื้นที่มักเกิดพายุฝนฟ้าคะนองและพายุฤดูร้อน
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot"></div>
+                    <div>
+                        <strong>6. แนวชายฝั่งทะเลอ่าวไทย (ชลบุรี / เพชรบุรี):</strong> พื้นที่มักพบพายุงวงช้าง (Waterspout) เหนือผิวน้ำ
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTopBtn" title="ขึ้นบนสุด">↑</button>
+
+    <!-- Footer Sitemap & Credits -->
+    <footer>
+        <div class="sitemap-container">
+            <div class="sitemap-col">
+                <h4>สารบัญเนื้อหา</h4>
+                <ul>
+                    <li><a href="#about">พายุคืออะไร</a></li>
+                    <li><a href="#tropical">พายุหมุนเขตร้อน</a></li>
+                    <li><a href="#thunderstorm">พายุฝนฟ้าคะนอง</a></li>
+                    <li><a href="#tornado">พายุงวงช้าง</a></li>
+                    <li><a href="#storm-map-section">แผนที่หมุดพายุ</a></li>
+                </ul>
+            </div>
+            
+            <div class="sitemap-col">
+                <h4>ข้อมูลสถาบัน</h4>
+                <ul>
+                    <li>สาขาภูมิศาสตร์</li>
+                    <li>คณะมนุษยศาสตร์และสังคมศาสตร์</li>
+                    <li>มหาวิทยาลัยสงขลานครินทร์ วิทยาเขตปัตตานี</li>
+                </ul>
+            </div>
+
+            <div class="sitemap-col credit-block">
+                <h4>คณะผู้จัดทำ</h4>
+                <p>
+                    <span class="label">ผู้จัดทำ:</span>
+                    นางสาว ลาตีฟะห์ ลาดอ
+                </p>
+                <p>
+                    <span class="label">อาจารย์ที่ปรึกษา:</span>
+                    อาจารย์วุฒิพงษ์ แสงมณี
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Fahs. ผลงานศึกษารายวิชา สาขาภูมิศาสตร์ มหาวิทยาลัยสงขลานครินทร์ วิทยาเขตปัตตานี</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('backToTopBtn');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.style.display = 'flex';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Google Maps API Initializer
+        function initMap() {
+            const thailandCenter = { lat: 13.0, lng: 101.2 };
+            
+            const map = new google.maps.Map(document.getElementById("googleMap"), {
+                zoom: 6,
+                center: thailandCenter,
+                mapTypeId: 'roadmap'
+            });
+
+            // รายการตำแหน่งปักหมุดพายุในประเทศไทย
+            const stormMarkers = [
+                {
+                    title: "พายุโซนร้อน แฮร์เรียต (2505)",
+                    position: { lat: 8.4167, lng: 100.1833 }, // แหลมตะลุมพุก นครศรีธรรมราช
+                    content: `
+                        <div style="font-family:'Prompt',sans-serif; padding:5px; max-width:240px;">
+                            <h4 style="color:#0f172a; margin-bottom:5px;">🌀 พายุโซนร้อน "แฮร์เรียต"</h4>
+                            <p style="font-size:0.85rem; color:#334155;"><b>ช่วงเวลา:</b> ต.ค. 2505</p>
+                            <p style="font-size:0.85rem; color:#64748b; margin-top:4px;">พัดขึ้นฝั่งที่แหลมตะลุมพุก อ.ปากพนัง จ.นครศรีธรรมราช สร้างความสูญเสียร้ายแรงที่สุดในประวัติศาสตร์ภาคใต้</p>
+                        </div>
+                    `
+                },
+                {
+                    title: "พายุไต้ฝุ่น เกย์ (2532)",
+                    position: { lat: 10.6833, lng: 99.3167 }, // อ.ปะทิว จ.ชุมพร
+                    content: `
+                        <div style="font-family:'Prompt',sans-serif; padding:5px; max-width:240px;">
+                            <h4 style="color:#0f172a; margin-bottom:5px;">🌀 พายุไต้ฝุ่น "เกย์"</h4>
+                            <p style="font-size:0.85rem; color:#334155;"><b>ช่วงเวลา:</b> พ.ย. 2532</p>
+                            <p style="font-size:0.85rem; color:#64748b; margin-top:4px;">ไต้ฝุ่นเพียงลูกเดียวที่พัดขึ้นฝั่งประเทศไทยโดยตรงด้วยกำลังแรงสูงสุด ณ อ.ปะทิว และ อ.ท่าแซะ จ.ชุมพร</p>
+                        </div>
+                    `
+                },
+                {
+                    title: "พายุโซนร้อน ปาบึก (2562)",
+                    position: { lat: 8.3500, lng: 100.2000 }, // นครศรีธรรมราช / ภาคใต้
+                    content: `
+                        <div style="font-family:'Prompt',sans-serif; padding:5px; max-width:240px;">
+                            <h4 style="color:#0f172a; margin-bottom:5px;">🌀 พายุโซนร้อน "ปาบึก"</h4>
+                            <p style="font-size:0.85rem; color:#334155;"><b>ช่วงเวลา:</b> ม.ค. 2562</p>
+                            <p style="font-size:0.85rem; color:#64748b; margin-top:4px;">พายุหมุนเขตร้อนที่พัดเข้าภาคใต้ของไทยนอกฤดูกาล (ช่วงต้นปี)</p>
+                        </div>
+                    `
+                },
+                {
+                    title: "พายุซูเปอร์ไต้ฝุ่น ยางิ (2567)",
+                    position: { lat: 19.9000, lng: 99.8333 }, // เชียงราย / ภาคเหนือ
+                    content: `
+                        <div style="font-family:'Prompt',sans-serif; padding:5px; max-width:240px;">
+                            <h4 style="color:#0f172a; margin-bottom:5px;">🌀 ซูเปอร์ไต้ฝุ่น "ยางิ"</h4>
+                            <p style="font-size:0.85rem; color:#334155;"><b>ช่วงเวลา:</b> ก.ย. 2567</p>
+                            <p style="font-size:0.85rem; color:#64748b; margin-top:4px;">เศษซากพายุและร่องมรสุมทำให้เกิดฝนตกหนักและอุทกภัยดินสไลด์ครั้งใหญ่ทางภาคเหนือ (เชียงราย เชียงใหม่ น่าน)</p>
+                        </div>
+                    `
+                },
+                {
+                    title: "พายุฝนฟ้าคะนอง / พายุฤดูร้อน",
+                    position: { lat: 16.4333, lng: 102.8333 }, // ภาคอีสาน (ขอนแก่น)
+                    content: `
+                        <div style="font-family:'Prompt',sans-serif; padding:5px; max-width:240px;">
+                            <h4 style="color:#0f172a; margin-bottom:5px;">⛈️ พายุฤดูร้อน (ภาคอีสาน/ภาคกลาง)</h4>
+                            <p style="font-size:0.85rem; color:#334155;"><b>ช่วงเวลา:</b> มี.ค. - พ.ค.</p>
+                            <p style="font-size:0.85rem; color:#64748b; margin-top:4px;">เกิดจากมวลอากาศเย็นจีนปะทะมวลอากาศร้อนของไทย ทำให้เกิดลมกระโชกแรงและลูกเห็บตก</p>
+                        </div>
+                    `
+                },
+                {
+                    title: "พายุงวงช้าง (Waterspout)",
+                    position: { lat: 12.9333, lng: 100.8833 }, // ชายฝั่งอ่าวไทย (ชลบุรี/พัทยา)
+                    content: `
+                        <div style="font-family:'Prompt',sans-serif; padding:5px; max-width:240px;">
+                            <h4 style="color:#0f172a; margin-bottom:5px;">🌪️ พายุงวงช้าง (ชายฝั่งทะเล)</h4>
+                            <p style="font-size:0.85rem; color:#334155;"><b>พื้นที่:</b> อ่าวไทย / อันดามัน</p>
+                            <p style="font-size:0.85rem; color:#64748b; margin-top:4px;">พายุหมุนงวงช้างเหนือผิวน้ำ เมื่อพัดขึ้นฝั่งอาจสร้างความเสียหายต่อสิ่งปลูกสร้างชายฝั่งและเรือประมง</p>
+                        </div>
+                    `
+                }
+            ];
+
+            const infoWindow = new google.maps.InfoWindow();
+
+            stormMarkers.forEach(storm => {
+                const marker = new google.maps.Marker({
+                    position: storm.position,
+                    map: map,
+                    title: storm.title,
+                    animation: google.maps.Animation.DROP
+                });
+
+                marker.addListener("click", () => {
+                    infoWindow.setContent(storm.content);
+                    infoWindow.open(map, marker);
+                });
+            });
+        }
+    </script>
+
+    <!-- Google Maps API Script -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5l0aPyGFqiqY5DpqOYf-8YhN_eYHHobU&callback=initMap&loading=async" async defer></script>
+</body>
+</html>
